@@ -1,10 +1,8 @@
-# Frontend - Movie Manager
+`frontend` (React + Vite + TypeScript + Tailwind).
 
-Install:
-npm install
+- Start frontend:
+  cd frontend
+  npm install
+  npm run dev
 
-Run:
-npm run dev
-
-Notes:
-- Vite dev server proxies /api to backend on localhost:4000 (see vite.config.ts)
+The frontend proxies API calls to http://localhost:4000
