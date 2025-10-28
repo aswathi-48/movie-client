@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api'
+  // baseURL: '/api'
+  baseURL: 'https://movie-server-um7x.onrender.com/api',
+  withCredentials: false,
 });
 
 // attach token if present
@@ -19,3 +21,4 @@ export function setToken(t: string | null) {
 }
 
 export default api;
+
