@@ -29,7 +29,7 @@ export default function EntryRow({ entry, onEdit, onDelete }: any) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showConfirm]);
 
-  const baseURL = 'http://localhost:4000';
+  const baseURL = 'https://movie-server-um7x.onrender.com';
   const imageUrl = entry.posterUrl ? `${baseURL}${entry.posterUrl}` : null;
 
   return (
