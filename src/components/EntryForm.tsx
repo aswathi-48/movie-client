@@ -68,7 +68,7 @@ export default function EntryForm({ onCreate, editing, onUpdate, onCancel }: Pro
   const submitFormData = async (data: FormValues) => {
     const formData = new FormData();
 
-    // ✅ Fixed: safely cast all fields to string
+    // Fixed: safely cast all fields to string
     (Object.entries(data) as [string, string][]).forEach(([k, v]) => {
       formData.append(k, v.toString());
     });
@@ -99,122 +99,33 @@ export default function EntryForm({ onCreate, editing, onUpdate, onCancel }: Pro
   };
 
   return (
-    <form
+     <form
       onSubmit={handleSubmit(submitFormData)}
-      className="bg-white p-4 rounded grid grid-cols-1 md:grid-cols-3 gap-3"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
     >
-      {/* Title */}
-      <div className="col-span-2">
-        <input
-          {...register('title', { required: 'Title is required' })}
-          placeholder="Title"
-          className="p-2 border rounded w-full"
-        />
-        {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
-      </div>
+      <input {...register("title", { required: "Title is required" })} placeholder="Title" className="p-2 border rounded w-full" />
+      <select {...register("type")} className="p-2 border rounded w-full">
+        <option value="Movie">Movie</option>
+        <option value="TV Show">TV Show</option>
+      </select>
+      <input {...register("director")} placeholder="Director" className="p-2 border rounded w-full" />
+      <input type="number" {...register("budget")} placeholder="Budget" className="p-2 border rounded w-full" />
+      <input {...register("location")} placeholder="Location" className="p-2 border rounded w-full" />
+      <input type="number" {...register("duration")} placeholder="Duration (mins)" className="p-2 border rounded w-full" />
+      <input type="number" {...register("year")} placeholder="Year" className="p-2 border rounded w-full" />
+      <textarea {...register("notes")} placeholder="Notes" className="p-2 border rounded w-full sm:col-span-2 lg:col-span-3" />
 
-      {/* Type */}
-      <div>
-        <select
-          {...register('type', { required: 'Type is required' })}
-          className="p-2 border rounded w-full"
-        >
-          <option value="Movie">Movie</option>
-          <option value="TV Show">TV Show</option>
-        </select>
-        {errors.type && <p className="text-red-500 text-sm">{errors.type.message}</p>}
-      </div>
-
-      {/* Director */}
-      <div>
-        <input
-          {...register('director', { required: 'Director name is required' })}
-          placeholder="Director"
-          className="p-2 border rounded w-full"
-        />
-        {errors.director && <p className="text-red-500 text-sm">{errors.director.message}</p>}
-      </div>
-
-      {/* Budget */}
-      <div>
-        <input
-          type="number"
-          {...register('budget', {
-            required: 'Budget is required',
-            min: { value: 1, message: 'Budget must be greater than 0' },
-          })}
-          placeholder="Budget"
-          className="p-2 border rounded w-full"
-        />
-        {errors.budget && <p className="text-red-500 text-sm">{errors.budget.message}</p>}
-      </div>
-
-      {/* Location */}
-      <div>
-        <input
-          {...register('location', { required: 'Location is required' })}
-          placeholder="Location"
-          className="p-2 border rounded w-full"
-        />
-        {errors.location && <p className="text-red-500 text-sm">{errors.location.message}</p>}
-      </div>
-
-      {/* Duration */}
-      <div>
-        <input
-          type="number"
-          {...register('duration', {
-            required: 'Duration is required',
-            min: { value: 1, message: 'Duration must be greater than 0' },
-          })}
-          placeholder="Duration (mins)"
-          className="p-2 border rounded w-full"
-        />
-        {errors.duration && <p className="text-red-500 text-sm">{errors.duration.message}</p>}
-      </div>
-
-      {/* Year */}
-      <div>
-        <input
-          type="number"
-          {...register('year', {
-            required: 'Year is required',
-            min: { value: 1880, message: 'Enter a valid year' },
-            max: { value: new Date().getFullYear(), message: 'Year cannot be in the future' },
-          })}
-          placeholder="Year"
-          className="p-2 border rounded w-full"
-        />
-        {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
-      </div>
-
-      {/* File Upload */}
-      <div className="col-span-2">
+      <div className="sm:col-span-2 lg:col-span-3">
         <input type="file" accept="image/*" onChange={handleFile} />
         {preview && <img src={preview} alt="preview" className="mt-2 max-h-40 rounded" />}
       </div>
 
-      {/* Notes */}
-      <div className="col-span-3">
-        <textarea
-          {...register('notes', { required: 'Notes are required' })}
-          placeholder="Notes"
-          className="p-2 border rounded w-full"
-        />
-        {errors.notes && <p className="text-red-500 text-sm">{errors.notes.message}</p>}
-      </div>
-
-      {/* Buttons */}
-      <div className="col-span-3 flex gap-2 justify-end">
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
-          {editing ? 'Update' : 'Add'}
+      <div className="sm:col-span-2 lg:col-span-3 flex flex-wrap justify-end gap-2 mt-2">
+        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          {editing ? "Update" : "Add"}
         </button>
         {editing && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-          >
+          <button onClick={onCancel} type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
             Cancel
           </button>
         )}
