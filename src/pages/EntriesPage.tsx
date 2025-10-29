@@ -235,13 +235,13 @@ export default function EntriesPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-8">
-      <h1 className="text-2xl font-bold mb-5 text-gray-800">
+   <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+      <h1 className="text-2xl md:text-3xl font-bold mb-5 text-gray-800 text-center md:text-left">
         🎬 Movie Manager
       </h1>
 
-      {/*  Entry Form */}
-      <div className="bg-gray-50 p-6 rounded-lg shadow mb-6">
+      {/* Entry Form */}
+      <div className="bg-gray-50 p-4 md:p-6 rounded-lg shadow mb-6">
         <EntryForm
           onCreate={handleCreate}
           editing={editing}
@@ -250,8 +250,8 @@ export default function EntriesPage() {
         />
       </div>
 
-      {/* Filter Bar */}
-      <div className="bg-white p-4 rounded-lg shadow mb-4 flex flex-col md:flex-row gap-3 items-center">
+      {/* Filter Section */}
+      <div className="bg-white p-4 rounded-lg shadow mb-4 flex flex-col md:flex-row gap-3 items-stretch md:items-center">
         <input
           type="text"
           placeholder="🔍 Search by title or director..."
@@ -293,17 +293,17 @@ export default function EntriesPage() {
               setTypeFilter("");
               setYearFilter("");
             }}
-            className="bg-gray-200 hover:bg-gray-300 px-3 py-2 rounded text-sm"
+            className="bg-gray-200 hover:bg-gray-300 px-3 py-2 rounded text-sm w-full md:w-auto"
           >
             Clear Filters
           </button>
         )}
       </div>
 
-      {/* Table Section */}
+      {/* Responsive Table */}
       <div className="bg-white rounded-lg shadow overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-blue-50">
+        <table className="min-w-full divide-y divide-gray-200 text-sm">
+          <thead className="bg-blue-50 text-gray-700">
             <tr>
               {[
                 "Title",
@@ -317,7 +317,7 @@ export default function EntriesPage() {
               ].map((head) => (
                 <th
                   key={head}
-                  className="px-4 py-3 text-left text-sm font-semibold text-gray-700"
+                  className="px-4 py-3 text-left font-semibold whitespace-nowrap"
                 >
                   {head}
                 </th>
